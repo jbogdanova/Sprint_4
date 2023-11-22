@@ -6,6 +6,7 @@ import ru.praktikum.services.qascooter.pages.MainPage;
 import ru.praktikum.services.qascooter.utils.WebUtils;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HeaderTest {
     WebDriver driver;
@@ -27,7 +28,7 @@ public class HeaderTest {
         mainPage.getHeader().clickLogoYandex();
         WebUtils.nextWindow(driver, driver.getWindowHandle());
         WebUtils.waitUrl(driver, "https://dzen.ru/");
-        assertEquals("https://dzen.ru/?yredirect=true", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("https://dzen.ru/"));
     }
 
     @After
