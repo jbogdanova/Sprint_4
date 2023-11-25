@@ -8,6 +8,8 @@ import ru.praktikum.services.qascooter.drivers.DriverFactory;
 import ru.praktikum.services.qascooter.pages.MainPage;
 import ru.praktikum.services.qascooter.pages.OrderPage;
 
+import static org.junit.Assert.assertFalse;
+
 @RunWith(Parameterized.class)
 public class CreateOrderTest {
     WebDriver driver;
@@ -46,6 +48,7 @@ public class CreateOrderTest {
         driver = DriverFactory.getDriver();
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
+        mainPage.clickCookieButton();
         if (entryPoint.equals("Header")) {
             mainPage.getHeader().clickOrderButton();
         } else if (entryPoint.equals("Main")) {
@@ -66,6 +69,7 @@ public class CreateOrderTest {
         orderPage.clickOrderButton();
         orderPage.clickAcceptButton();
         orderPage.isDisplayedSuccessMessage();
+        assertFalse(orderPage.getSuccessText().isEmpty());
     }
 
     @After

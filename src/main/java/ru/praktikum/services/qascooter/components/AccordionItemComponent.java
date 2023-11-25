@@ -7,27 +7,23 @@ import ru.praktikum.services.qascooter.pages.BasePage;
 import ru.praktikum.services.qascooter.utils.WebUtils;
 
 public class AccordionItemComponent extends BasePage {
-    private final By accordionItemHeading;
-    private final By accordionItemPanel;
-
-    public AccordionItemComponent(WebDriver driver, int id) {
+    public AccordionItemComponent(WebDriver driver) {
         super(driver);
-        accordionItemHeading = By.id("accordion__heading-" + id);
-        accordionItemPanel = By.id("accordion__panel-" + id);
     }
 
-    public void clickAccordionItem() throws InterruptedException {
-        WebElement accordionItemHeading = driver.findElement(this.accordionItemHeading);
-        WebUtils.scrollTo(driver, accordionItemHeading);
-        Thread.sleep(100);
+    public void clickAccordionItem(int id) {
+        WebElement accordionItemHeading = driver.findElement(By.id("accordion__heading-" + id));
         accordionItemHeading.click();
     }
 
-    public String getAccordionItemHeadingText() {
+    public String getAccordionItemHeadingText(int id) {
+        By accordionItemHeading = By.id("accordion__heading-" + id);
         return driver.findElement(accordionItemHeading).getText();
     }
 
-    public String getAccordionItemPanelText() {
+    public String getAccordionItemPanelText(int id) {
+        By accordionItemPanel = By.id("accordion__panel-" + id);
+        WebUtils.wait(driver, accordionItemPanel);
         return driver.findElement(accordionItemPanel).getText();
     }
 }

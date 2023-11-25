@@ -36,13 +36,14 @@ public class FAQTest {
     }
 
     @Test
-    public void checkAccordionItemText() throws InterruptedException {
+    public void checkAccordionItemText() {
         driver = DriverFactory.getDriver();
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
-        mainPage.getAccordionItem(id).clickAccordionItem();
-        String resultHeadingText = mainPage.getAccordionItem(id).getAccordionItemHeadingText();
-        String resultPanelText = mainPage.getAccordionItem(id).getAccordionItemPanelText();
+        mainPage.clickCookieButton();
+        mainPage.getAccordionItem().clickAccordionItem(id);
+        String resultHeadingText = mainPage.getAccordionItem().getAccordionItemHeadingText(id);
+        String resultPanelText = mainPage.getAccordionItem().getAccordionItemPanelText(id);
         assertEquals(accordionItemHeading, resultHeadingText);
         assertEquals(accordionItemPanel, resultPanelText);
     }

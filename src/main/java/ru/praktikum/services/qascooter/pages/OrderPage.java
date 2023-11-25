@@ -18,6 +18,7 @@ public class OrderPage extends BasePage {
     private final By orderButton = By.xpath(".//div[contains(@class, 'Order_Buttons')]/button[contains(@class, 'Button_Button') and not(contains(@class, 'Inverted'))]");
     private final By acceptButton = By.xpath(".//button[text() = 'Да']");
     private final By successMessage = By.xpath(".//div[contains(@class, 'Order_ModalHeader') and text() = 'Заказ оформлен']");
+    private final By successText = By.xpath(".//div[contains(@class, 'Order_Text')]");
     private final By validationError = By.xpath(".//div[contains(@class, 'Input_Visible') or contains(@class, 'Order_MetroError')]");
 
     public OrderPage(WebDriver driver) {
@@ -77,6 +78,11 @@ public class OrderPage extends BasePage {
 
     public void isDisplayedSuccessMessage() {
         driver.findElement(successMessage).isDisplayed();
+        driver.findElement(successText).isDisplayed();
+    }
+
+    public String getSuccessText() {
+        return driver.findElement(successText).getText();
     }
 
     public void open() {
