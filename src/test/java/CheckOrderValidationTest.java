@@ -1,6 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import ru.praktikum.services.qascooter.constants.ValidationConstant;
 import ru.praktikum.services.qascooter.drivers.DriverFactory;
@@ -9,12 +7,16 @@ import ru.praktikum.services.qascooter.pages.OrderPage;
 import static org.junit.Assert.assertEquals;
 
 public class CheckOrderValidationTest {
-    WebDriver driver;
-    OrderPage orderPage;
+    private static WebDriver driver;
+    private OrderPage orderPage;
+
+    @BeforeClass
+    public static void beforeAll() {
+        driver = DriverFactory.getDriver();
+    }
 
     @Before
     public void setUp() {
-        driver = DriverFactory.getDriver();
         orderPage = new OrderPage(driver);
         orderPage.open();
     }
@@ -62,8 +64,8 @@ public class CheckOrderValidationTest {
         assertEquals("Введите корректный номер", error);
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void tearDown() {
         if (driver != null) {
             driver.quit();
         }
